@@ -1,8 +1,9 @@
-import { applyMove, createGame, getWinningLine, isDraw, resetGame, type GameState } from "./engine";
 import "./style.css";
+import { mountApp } from "./app";
 
 const app = document.querySelector<HTMLDivElement>("#app");
 if (!app) throw new Error("App root not found");
+mountApp(app);
 
 let game: GameState = createGame();
 let winningLine: readonly number[] = [];
