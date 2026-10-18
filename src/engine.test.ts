@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { applyMove, createGame, InvalidMoveError, isDraw, resetGame } from "./engine.ts";
+import { applyMove, createGame, getWinningLine, InvalidMoveError, isDraw, resetGame } from "./engine.ts";
 
 function play(cells: number[]) {
   return cells.reduce((state, cell) => applyMove(state, cell), createGame());
@@ -9,6 +9,7 @@ function play(cells: number[]) {
 test("detects an X win", () => {
   const game = play([0, 3, 1, 4, 2]);
   assert.equal(game.winner, "X");
+  assert.deepEqual(getWinningLine(game.board), [0, 1, 2]);
   assert.equal(isDraw(game), false);
 });
 

@@ -25,17 +25,20 @@ const WINNING_LINES: ReadonlyArray<readonly [number, number, number]> = [
   [0, 4, 8], [2, 4, 6],
 ];
 
+/** Returns the winning cell indices, or an empty array when the board has no winner. */
+export function getWinningLine(board: readonly Cell[]): readonly number[] {
+  return WINNING_LINES.find(([a, b, c]) =>
+    board[a] !== null && board[a] === board[b] && board[a] === board[c],
+  ) ?? [];
+}
+
 export function createGame(): GameState {
   return { board: Array<Cell>(9).fill(null), currentPlayer: "X", winner: null };
 }
 
 export function getWinner(board: readonly Cell[]): Player | null {
-  for (const [a, b, c] of WINNING_LINES) {
-    if (board[a] !== null && board[a] === board[b] && board[a] === board[c]) {
-      return board[a];
-    }
-  }
-  return null;
+  const [first] = getWinningLine(board);
+  return first === undefined ? null : board[first];
 }
 
 export function isDraw(state: GameState): boolean {
