@@ -30,9 +30,15 @@ export function createGame(): GameState {
 }
 
 export function getWinner(board: readonly Cell[]): Player | null {
+  const line = getWinningLine(board);
+  return line ? board[line[0]] : null;
+}
+
+/** Returns the winning cell indexes, if the board contains a winning line. */
+export function getWinningLine(board: readonly Cell[]): readonly [number, number, number] | null {
   for (const [a, b, c] of WINNING_LINES) {
     if (board[a] !== null && board[a] === board[b] && board[a] === board[c]) {
-      return board[a];
+      return [a, b, c];
     }
   }
   return null;
