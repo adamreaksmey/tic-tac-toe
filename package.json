@@ -1,0 +1,14 @@
+{
+  "name": "tic-tac-toe-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "node --test src/*.test.ts"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3",
+    "vite": "^8.3.4"
+  }
+}
